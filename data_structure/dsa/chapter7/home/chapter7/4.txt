@@ -1,0 +1,26 @@
+void SearchBST(BiTree &T,int X)
+{
+    s-new BiTNode;
+    s->data=X;
+    s->count=0;
+    s->lchiid=s->rchild=NULL;
+    if(!T) {
+        T=s;
+        return;
+    }
+    f=NULL;
+    q=T;
+    while(q) {
+        if(q->data==X) {
+            q->count++;
+            return ;
+        }
+        f=q;
+        if(X<q->data=q=q->lchild);
+        else q=q->rchild;
+    }
+    if(f->data>X)
+        f->lchild=s;
+    else
+        f->rchild=s;
+}

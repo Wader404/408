@@ -1,0 +1,20 @@
+int Level(BiTree T)
+{
+    num = 0;
+    if(T) {
+        InitQueue(Q);
+        EnQueue(Q, T);
+        while(!QueueEmpty(Q)) {
+            DeQueue(Q, p);
+            cout << p -> data;
+            if ((p -> lchild && !p -> rchild) || (!p -> lchild && p -> rchild)
+                num++;
+            if(p -> lchild) EnQueue(Q, p -> lchild);
+            if(p -> rchild) EnQueue(Q, p -> rchild);
+        }
+    }
+    return num;
+}
+
+
+       

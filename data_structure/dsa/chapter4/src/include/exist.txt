@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void Gen_Next(const char* arr, int* Next)
+{
+    int i = 1;
+    int j = 0;
+    Next[1] = 0;
+    int len = strlen(arr);
+
+    while (i < len) {
+        if ((j == 0) || arr[i] == arr[j]) {
+            i++;
+            j++;
+            Next[i] = j;
+        } else {
+            j = Next[j];
+        }
+    }
+}
+
+int KMP(char* txt, char* pat)
+{
+    int i = 0;
+    int j = 0;
+    int txt_len = strlen(txt);
+    int pat_len = strlen(pat);
+    int *Next = (int*)malloc(pat_len*sizeof(int));
+
+    Gen_Next(Next, pat);
+
+    if ((txt_len == 0 && pat_len == 0) || pat_len == 0) {
+        return 0;
+    } else if ( txt_len == 0 || pat_len > txt_len) {
+        return -1;
+    }
+
+    while (i < txt_len && j < pat_len) {
+        if (txt[i] == pat[j]) {
+            i++;
+            j++;
+        } else {
+            j = Next[j];
+        }
+    }
+
+    if (j >= pat_len) {
+        return i - j;
+    }
+    return -1;
+}
+

@@ -1,0 +1,33 @@
+int Width(BiTree T)
+{
+    if (T == NULL) {
+        return 0;
+    }
+    BiTree Q[];
+    front = 1;
+    rear = 1;
+    last = 1;
+    temp = 0;
+    maxw = 0;
+    Q[rear] = T;
+    while (front <= last) {
+        p = Q[front++];
+        temp++;
+        if (p -> lchild != NULL) {
+            Q[++rear] = p -> lchild;
+        }
+        if (p -> rchild != NULL) {
+            Q[++rear] = p -> rchild;
+        }
+        if (front > last) {
+            last = rear;
+            if (temp > maxw) {
+                maxw = temp;
+            }
+            temp = 0;
+        }
+        }
+    return maxw;
+}
+
+

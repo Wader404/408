@@ -1,0 +1,19 @@
+void AllPath(BiTree T, ElemType path[], int pathlen)
+{
+    if (T != NULL) {
+        if (T -> lchild == NULL && T -> rchild == NULL) {
+            cout<<" "<<T-> data<<"to root node: "<<T->data;
+            for(i = pathlen - 1; i>= 0; i--) {
+                cout<<path[i]<<endl;
+            } else {
+                path[pathlen] = T -> data;
+                pathlen++;
+                AllPath(T -> lchild, path, pathlen);
+                AllPath(T -> rchild, path, pathlen);
+                pathlen--;
+            }
+        }
+    }
+}
+
+

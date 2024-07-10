@@ -1,0 +1,18 @@
+void DFS(ALGraph G, int v)
+{
+    InitStack(&S);
+    Push(S, v);
+    while (!StackEmpty(S)) {
+        Pop(S, k);
+        if (!visited[k]) {
+            cout<<k;
+            visited[k] = true;
+            p = G.vertices[k].firstarc;
+            while (p != NULL) {
+                w = p -> adjvex;
+                if (!visited[w]) Push(S, w);
+                p = p -> nextarc;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+bool Insert_K()
+{
+    cin>>data;
+    ant=H(data);
+    p=HT[ant];
+    while (p->next) {
+        if(p->next->data==data)
+        return false;
+        p=p->next;
+    }
+    s=newLNode;
+    s->data=data;
+    s->next=p->next;
+    p->next-s;
+    return true;
+}
+
+bool Delete_K( )
+{
+    cin>>data;
+    ant=H(data);
+    p=HT[ant];
+    while(p->next) {
+        if(p->next->data==data) {
+            s=p->next;
+            p->next=s->next;
+            delete s;
+            return true;
+        }
+        p=p->next;
+    }
+ return false;
+}

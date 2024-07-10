@@ -1,0 +1,19 @@
+int visited[MAXSIZE];
+int PathLenK(ALGraph G, int i, int j, int k)
+{
+    if (i == j && k == 0) {
+        return 1;
+    } else {
+        visited[i] = true;
+        for (p = G.vertices[i].firstarc; p; p = p -> nextarc) {
+            v = p -> adjvex;
+            if (!visited[v]) {
+                if (PathLenK(G, v, j, k - 1)) {
+                    return 1;
+                }
+            }
+        }
+        visited[i] = false;
+    }
+    return 0;
+}

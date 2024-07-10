@@ -1,0 +1,16 @@
+typedef struct BiTNode
+{
+    TElemtype data;
+    struct BiTNode *lchild,*rchild;
+}BiTNode,*BiTree;
+BiTree pre=NULL;
+void JudgeBST(BiTree T,int aflag)
+{
+    if(T!=NULL&&flag) {
+        JudgeBST(T->lchild,flag);
+        if(pre==NULL) pre=T;
+        else if(pre->data<T->data) pre=T;
+        else flag=0;
+    JudgeBST(T->rchild,flag);
+    }
+}

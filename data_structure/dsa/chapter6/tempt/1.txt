@@ -1,0 +1,152 @@
+邻接矩阵形式：
+(1)
+InsertVex(AMGraph &G, int v)
+{
+    if ((G.vexnum + 1) > MVNUM) {
+        return INFEASIBLE;
+    }
+    G.vexnum++;
+    G.vexs[G.vexnum] = v;
+    for (k = 0; k < G.vexnum; k++) {
+        G.arcs[G.vexnum][k] = G.arcs[k][G.vexnum] = 0;
+    }
+    return OK;
+}
+
+(2)
+DeleteVex(AMGraph &G, int v)
+{
+    n = G.vexnum;
+    if ((m = LocateVex(G, v)) < 0) {
+        return ERROR;
+    }
+    G.vexs[m] <-> G.vexs[n];
+    for (i = 0; i < n; i++) {
+        G.arcs[m][i] <-> G.arcs[n][i];
+        G.arcs[i][m] <-> G.arcs[i][n];
+    }
+    G.vexnum--;
+    return OK;
+}
+
+(3)
+InsertArc(AMGraph &G, int v, int w)
+{
+    if ((i = LocateVex(G, v) < 0) return ERROR;
+    if ((i = LocateVex(G, w) < 0) return ERROR;
+    if (i == j) return ERROR;
+    G.arcs[i][j] = G.arcs[j][i] = 1;
+    G.arcnum++;
+    return OK;
+}
+
+(4)
+DeleteArc(AMGraph &G, int v, int w)
+{
+    if ((i = LocateVex(G, v) < 0) return ERROR;
+    if ((i = LocateVex(G, w) < 0) return ERROR;
+    G.arcs[i][j] = G.arcs[j][i] = 0;
+    G.arcnum--;
+    return OK;
+}
+
+
+邻接表形式：
+(1)
+InsertVex(AMGraph &G, int v)
+{
+    if ((G.vexnum + 1) > MVNUM) return INFEASIBLE;
+    G.vexnum++;
+    G.vertices[G.vexnum].data = v;
+    G.vertices[G.vexnum].firstarc = NULL;
+    return OK;
+}
+
+(2)
+DeleteVex(AMGraph &G, int v)
+{
+    n = LocateVex(G, v);
+    if (n == 0) return 0;
+    for (i = n; i < G.vexnum; i++) {
+        G.vertices[i] = G.vertices[i + 1];
+    }
+    G.vexnum--;
+    for (i = 1; i < G.vexnum; i++) {
+        p = G.vertices[i];
+        q = G.vertices[i];
+        if (p.firstarc -> adjvex == v) {
+            G.vertices[i].firstarc = G.vertices[i].firstarc -> nextarc;
+            G.arcnum--;
+            continue;
+        }
+        q.firstarc = q.firstarc -> nextarc;
+        while (q.firstarc) {
+            if (q.firstarc -> adjvex == v) {
+                p.firstarc -> nextarc = q.firstarc -> nextarc;
+                G.arcnum--;
+                break;
+            }
+            p.firstarc = q.firstarc;
+            q.firstarc = q.firstarc -> nextarc;
+        }
+    }
+    return OK;
+}
+
+(3)
+InsertArc(AMGraph &G, int v, int w)
+{
+    i = LocateVex(G, v);
+    j = LocateVex(G, w);
+    if (i == 0) return ERROR;
+    if (j == 0) return ERROR;
+    p1 = nuw ArcNode;
+    p1 -> adjvex = j;
+    p1 -> nextarc = G.vertices[i].firstarc;
+    G.vertices[i].firstarc = p1;
+    p2 = new ArcNode;
+    p2 -> adjvex = i;
+    p2 -> nextarc = G.vertices[j].firstarc;
+    G.vertices[j].firstarc = p2;
+    G.arcnum++;
+    return OK;
+}
+
+(4)
+DeleteArc(AMGraph &G, int v, int w)
+{
+    i = LocateVex(G, v);
+    j = LocateVex(G, w);
+    if (i == 0) return ERROR;
+    if (j == 0) return ERROR;
+    if (G.vertices[i].firstarc -> adjvex == w) {
+        G.vertices[i].firstarc = G.vertices[i].firstarc -> nextarc;
+    } else {
+        p1 = G.vertices[i].firstarc;
+        p2 = G.vertices[i].firstarc;
+        while (p2 -> nextarc) {
+            if (p2 ->adjvex == w) {
+                p1 -> nextarc = p2 -> nextarc;
+                break;
+            }
+            p1 = p2;
+            p2 = p2 -> nextarc;
+        }
+    }
+    if (G.vertices[j].firstarc -> adjvex == v) {
+        G.vertices[j].firstarc = G.vertices[j].firstarc -> nextarc;
+    } else {
+        p1 = G.vertices[j].firstarc;
+        p2 = G.vertices[j].firstarc;
+        while (p2 -> nextarc) {
+            if (p2 -> adjvex == v) {
+                p1 -> nextarc = p2 -> nextarc;
+                break;
+            }
+            p1 = p2;
+            p2 = p2 -> nextarc;
+        }
+    }
+    G.arcnum--;
+    return OK;
+}

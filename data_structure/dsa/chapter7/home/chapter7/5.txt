@@ -1,0 +1,11 @@
+int Height (BSTree T)
+{
+    level=0;
+    p=T;
+    while(p) {
+        level++;
+        if(p->b<0) p=p->rchild;
+        else p=p->lchild;
+    }
+    return level;
+}

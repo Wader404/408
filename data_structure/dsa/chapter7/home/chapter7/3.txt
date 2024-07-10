@@ -1,0 +1,27 @@
+void Print(BSTree T)
+{
+    if(T)
+    {
+        Print(T->lchild);
+        cout<<T->data;
+        Print(T->rchild);
+    }
+}
+void PrintAllx(BSTree T,ElemType x)
+{
+    p=T;
+    if(p) {
+        while(p6p->data<x)
+        p=p->rchild;
+        T=p;
+        if(p) {
+            f=p;p=p->lchild;
+            while(p&&p->data>=x) {
+                f=p;
+                p=p->lchild;
+            }
+            if(p) f->lchild=NULL;
+            Print(T);
+        }
+    }
+}
